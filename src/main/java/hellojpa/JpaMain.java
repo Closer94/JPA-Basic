@@ -20,14 +20,18 @@ public class JpaMain {
         tx.begin();
 
         try{
-            //비영속
-            Member member = new Member();
-            member.setId(100L);
-            member.setName("HelloJPA");
-
             //영속
-            em.persist(member)
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAA");
 
+            //준영속상태 => JPA 에서 관리하지 않는것
+            //특정 엔티티만 준영속상태로 전환
+            em.detach(member);
+
+            System.out.println("==========================");
+            Member member2 = em.find(Member.class, 150L);
+
+            tx.commit();
             /** Insert
             Member member = new Member();
             member.setId(2L);
@@ -36,9 +40,9 @@ public class JpaMain {
             em.persist(member);
             **/
             /** Select
-            Member findMemeber = em.find(Member.class, 1L);
-            System.out.println("findMember = " + findMemeber.getId());
-            System.out.println("findMember = " + findMemeber.getName());
+            Member findMember = em.find(Member.class, 1L);
+            System.out.println("findMember = " + findMember.getId());
+            System.out.println("findMember = " + findMember.getName());
             tx.commit();
              **/
             /** Delete
@@ -51,6 +55,7 @@ public class JpaMain {
             findMemeber.setName("가브송");
             tx.commit();
              **/
+            /**
             //JPQL : 엔티티 객체를 대상으로 쿼리를 짠다. || SQL: 데이터베이스 테이블을 대상으로 쿼리를 짠다.
             //Member 객체를 대상으로 쿼리를 짜야한다. (Member 객체를 다 가져와서 객체 m 으로 보여준다.)
             List<Member> result = em.createQuery("select m from Member as m", Member.class)
@@ -60,6 +65,7 @@ public class JpaMain {
             for (Member member : result) {
                 System.out.println("member.mname = " + member.getName());
             }
+            **/
         }catch (Exception e){
             tx.rollback();
         }finally {

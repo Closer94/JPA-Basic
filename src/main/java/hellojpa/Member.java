@@ -14,6 +14,14 @@ public class Member {
     //만약 DB 컬럼명과 Member 필드명이 다르다면? @Column(name = "username")
     private String name;
 
+    //반드시 기본생성자를 만들고 추가적으로 생성자를 만들어야한다!
+    public Member(){ }
+
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
