@@ -20,6 +20,7 @@ public class JpaMain {
         tx.begin();
 
         try{
+            /*
             //영속
             Member member = em.find(Member.class, 150L);
             member.setName("AAAAA");
@@ -30,7 +31,7 @@ public class JpaMain {
 
             System.out.println("==========================");
             Member member2 = em.find(Member.class, 150L);
-
+            */
             tx.commit();
             /** Insert
             Member member = new Member();
